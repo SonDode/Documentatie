@@ -1,0 +1,63 @@
+# ===========================
+# Fisiere temporare LaTeX
+# ===========================
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.synctex.gz
+*.synctex(busy)
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.glo
+*.gls
+*.glg
+*.acn
+*.acr
+*.alg
+*.ist
+*.run.xml
+*-blx.bib
+*.bcf
+*.nav
+*.snm
+*.vrb
+*.dvi
+*.ps
+
+# ===========================
+# PDF generat (optional)
+# Decomenteaza daca nu vrei
+# sa urci PDF-ul pe GitHub
+# ===========================
+# main.pdf
+
+# ===========================
+# Fisiere editor TeXstudio
+# ===========================
+*.texstudio
+*.backup
+*~
+
+# ===========================
+# Fisiere temporare TeXstudio
+# ===========================
+*.tmp.*
+
+# ===========================
+# Claude Code
+# ===========================
+.claude/
+
+# ===========================
+# Fisiere sistem Windows
+# ===========================
+Thumbs.db
+desktop.ini

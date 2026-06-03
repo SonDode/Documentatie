@@ -1,0 +1,61 @@
+\documentclass[a4paper,12pt,oneside]{report}
+\usepackage{OvidiusFMI}
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{color,xcolor}
+\usepackage{framed}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig,epstopdf,url,array}
+\usepackage{multicol,multirow}
+\include{custom-lst-style}
+
+%-----------------------------------------------------------------------------------------------------------%
+% PORTIUNE CUSTOMIZABILA - DATE PERSONALE
+%-----------------------------------------------------------------------------------------------------------%
+
+\facultatea{Matematic\u a \c si Informatic\u a}
+\specializarea{Informatic\u a}
+\teza{licen\c t\u a}
+
+\titlu{Gym-Connect -- Aplica\c tie web pentru gestionarea antrenamentelor fizice}
+
+\gradDidacticCP{Lect.univ.dr.}
+\coordonatorPrincipal{Dorin Iordache}
+
+\autor{Dode Andrei - Robert}
+\data{2026}
+
+%-----------------------------------------------------------------------------------------------------------%
+
+\begin{document}
+\maketitle
+
+\pagenumbering{roman}
+
+% Abstract
+\include{abstract}
+
+\tableofcontents
+
+\pagenumbering{arabic}
+
+% Capitolele lucrarii
+\include{introducere}        % Cap. 1 - Introducere si Motivatie
+\include{staredomeniu}       % Cap. 2 - Starea actuala a domeniului
+\include{tehnologii}         % Cap. 3 - Tehnologii si elemente teoretice
+\include{solutiepropusa}     % Cap. 4 - Solutia propusa si arhitectura
+\include{prezentareaplicatie} % Cap. 5 - Prezentarea aplicatiei
+\include{concluzii}          % Cap. 6 - Concluzii
+
+\bibliographystyle{unsrt}
+\setlength{\baselineskip}{\normalbaselineskip}
+\setlength{\parskip}{0pt}
+\bibliography{refs}
+
+% Anexe (optional)
+% \include{anexe}
+
+\end{document}

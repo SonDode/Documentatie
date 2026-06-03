@@ -1,0 +1,120 @@
+\chapter{Introducere \c si Motiva\c tie}
+
+\section{Contextul problemei}
+
+Tr\u aim \^ intr-o perioad\u a \^ in care aproape orice aspect al vie\c tii
+cotidiene a fost digitalizat -- de la cump\u ar\u aturi la servicii bancare.
+Cu toate acestea, \^ in sala de for\c t\u a lucrurile stau surprinz\u ator de
+diferit. Mul\c ti sportivi amatori \^ inc\u a \^ i\c si noteaz\u a
+antrenamentele \^ intr-un caiet fizic sau, mai r\u au, se bazeaz\u a pe
+memorie. Consecin\c ta este mereu aceea\c si: dup\u a dou\u a luni de
+antrenament, nu mai \c stii exact ce greut\u a\c ti ai folosit s\u apt\u am\^ ana
+trecut\u a \c si nu po\c ti s\u a \^ i\c ti dai seama dac\u a ai progresat sau
+b\u atu\c ti pasul pe loc.
+
+Primele aplica\c tii dedicate fitness-ului au ap\u arut \^ in jurul anului
+2009, simultan cu explozia smartphone-urilor \cite{grandview2023fitness}.
+De atunci, pia\c ta a crescut considerabil, \^ ins\u a direc\c tia de
+dezvoltare a majorit\u a\c tii produselor a urmat acela\c si tipar:
+func\c tii de baz\u a gratuite, restul \^ in spatele unui abonament lunar.
+Rezultatul este c\u a un sportiv care vrea s\u a vad\u a un grafic simplu al
+progresului s\u au trebuie s\u a pl\u ateasc\u a, deseori f\u ar\u a s\u a
+\c stie exact ce prime\c ste \^ in schimb.
+
+Principiul \textbf{progressive overload} -- ideea c\u a mu\c schii cresc
+c\^ and \^ ii supui treptat la efort tot mai mare -- este recunoscut \^ in
+literatur\u a ca fundamentul oric\u arui program de antrenament eficient
+\cite{zatsiorsky2006science}. Aplicarea lui corect\u a presupune \^ ins\u a
+s\u a \c stii \^ intotdeauna de unde ai pornit \c si unde ai ajuns. F\u ar\u a
+un istoric clar al antrenamentelor, progressive overload devine aproape
+imposibil de aplicat \^ in practic\u a.
+
+\section{Motiva\c tie personal\u a}
+
+Ideea acestui proiect a ap\u arut dintr-o situa\c tie cu care m-am
+confruntat personal. Ca student la Informatic\u a care frecventeaz\u a
+sala de for\c t\u a de c\u a\c tiva ani, am \^ incercat mai multe aplica\c tii
+de tracking -- de la MyFitnessPal la Strong App. Problema era \^ intotdeauna
+aceea\c si: fie aplicatia \^ imi cerea bani pentru func\c tii pe care le
+consider\u a elementare, fie era at\^ at de \^ inc\u arcat\u a de op\c tiuni
+\^ inc\^ at m\u a descuraja s-o mai deschid dup\u a antrenament, c\^ and e\c sti
+obosit \c si nu ai chef de meniuri complicate.
+
+La un moment dat mi-am zis c\u a, dac\u a tot \^ inv\u a\c t s\u a construiesc
+aplica\c tii web, ar fi p\u acat s\u a nu construiesc una care s\u a \^ imi
+rezolve exact aceast\u a problem\u a. Nu o aplica\c tie cu zece func\c tii pe
+care nu le folose\c ste nimeni, ci una simpl\u a, care s\u a fac\u a bine
+un lucru: s\u a \^ imi \c tin\u a minte antrenamentele \c si s\u a \^ imi
+arate dac\u a m\u a \^ imbun\u at\u a\c tesc sau nu. Accesibil\u a din orice
+browser, gratuit\u a \c si, de ce nu, open-source.
+
+\section{Obiectivele lucr\u arii}
+
+Plec\^ and de la problemele identificate mai sus, aceast\u a lucrare
+\^ i\c si propune s\u a realizeze urm\u atoarele:
+
+\begin{enumerate}
+  \item Proiectarea \c si implementarea complet\u a a unei aplica\c tii
+        web de tip client-server pentru \^ inregistrarea \c si gestionarea
+        antrenamentelor de for\c t\u a;
+  \item Implementarea unui mecanism de autentificare securizat, cu
+        izolarea strict\u a a datelor fiec\u arui utilizator;
+  \item Realizarea unui modul de antrenament \^ in timp real, cu suport
+        pentru timer de odihn\u a, calculator de distribu\c tie a
+        pl\u acilor pe bar\u a \c si indicatori de intensitate
+        (RIR \c si 1RM estimat);
+  \item Construirea unui modul de analiz\u a a progresului bazat pe
+        regresie liniar\u a, cu predic\c tie pe termen scurt \c si
+        detec\c tie automat\u a a platourilor de performan\c t\u a;
+  \item Validarea solu\c tiei prin utilizare real\u a \c si analiza
+        datelor ob\c tinute.
+\end{enumerate}
+
+\section{Contribu\c tii originale}
+
+Pe l\^ ang\u a implementarea tehnic\u a propriu-zis\u a, aceast\u a lucrare
+aduce urm\u atoarele contribu\c tii originale:
+
+\begin{itemize}
+  \item Proiectarea unui model de date adaptat specific domeniului
+        antrenamentelor de for\c t\u a, cu suport pentru seturi de
+        \^ inc\u alzire, RIR per set \c si asocierea sesiunilor cu
+        \c sabloane de rutine;
+  \item Implementarea calculului 1RM estimat prin combinarea a dou\u a
+        formule consacrate -- Brzycki \cite{brzycki1993strength} \c si
+        Epley \cite{epley1985} -- \c si corelarea rezultatului cu
+        valoarea RIR \^ inregistrat\u a;
+  \item Un algoritm simplu dar eficient de detec\c tie a platourilor,
+        bazat pe analiza tendin\c tei volumului s\u apt\u am\^ anal pe
+        o fereastr\u a de trei s\u apt\u am\^ ani;
+  \item Un calculator de distribu\c tie a pl\u acilor pe bar\u a
+        (20 kg), util \^ in practic\u a pentru configurarea rapid\u a
+        a greut\u a\c tii la un exerci\c tiu.
+\end{itemize}
+
+\section{Structura lucr\u arii}
+
+Lucrarea este \^ imp\u ar\c tit\u a \^ in \c sase capitole, fiecare
+construindu-se pe cel anterior.
+
+\textbf{Capitolul 2} analizeaz\u a aplica\c tiile existente pe pia\c t\u a --
+MyFitnessPal, Strong, Hevy \c si Jefit -- \c si explic\u a de ce
+niciuna nu acoper\u a complet nevoia pe care Gym-Connect o
+\^ intâmpin\u a.
+
+\textbf{Capitolul 3} prezint\u a toate tehnologiile folosite \^ in
+proiect -- de la React \c si TypeScript p\^ an\u a la Prisma,
+PostgreSQL pe Neon \c si Clerk -- \c si argumenteaz\u a de ce a
+fost aleas\u a fiecare.
+
+\textbf{Capitolul 4} descrie arhitectura sistemului: cum
+sunt organizate datele \^ in baza de date, cum func\c tioneaz\u a
+API-ul REST \c si cum este gestionat\u a autentificarea.
+
+\textbf{Capitolul 5} prezint\u a aplica\c tia a\c sa cum arat\u a
+\^ in realitate -- cu capturi de ecran din fiecare modul \c si
+fragmente de cod reprezentative.
+
+\textbf{Capitolul 6} trage concluziile, discut\u a ce ar putea
+fi f\u acut mai bine \c si propune direc\c tii de dezvoltare
+pentru viitor.

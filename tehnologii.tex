@@ -1,0 +1,262 @@
+\chapter{Tehnologii \c si elemente teoretice utilizate}
+
+Alegerea stivei tehnologice a fost una dintre primele \c si cele mai
+importante decizii ale acestui proiect. Criteriul principal a fost
+stabilitatea: nu am c\u autat s\u a folosesc ceva nou doar pentru c\u a
+e la mod\u a, ci tehnologii mature, bine documentate \c si cu o
+comunitate activ\u a. Un alt criteriu a fost compatibilitatea
+reciproc\u a -- toate piesele stivei trebuiau s\u a se integreze
+natural, f\u ar\u a prea mult\u a configura\c tie manual\u a.
+Rezultatul este o stiv\u a omogen\u a TypeScript at\^ at pe frontend,
+c\^ at \c si pe backend, ceea ce a simplificat considerabil
+dezvoltarea \c si mentenan\c ta codului.
+
+\section{React}
+
+Atunci c\^ and am \^ inceput s\u a planific frontenidul, React
+\cite{react2024} era alegerea evident\u a. Nu neap\u arat pentru
+c\u a e cel mai popular -- ci pentru c\u a modelul s\u au de
+\textbf{componente} se potrive\c ste perfect cu modul \^ in care
+g\^ andesc o interfa\c t\u a: unit\u a\c ti independente, fiecare
+cu responsabilitatea ei, reutilizabile oriunde ai nevoie de ele.
+
+React a fost creat de Meta \c si lansat public \^ in 2013. La baza
+lui st\u a un mecanism numit \textbf{Virtual DOM}: \^ in loc s\u a
+modifice direct pagina HTML la orice schimbare de date, React
+calculeaz\u a mai \^ int\^ ai diferen\c ta fa\c t\u a de starea
+anterioar\u a \c si aplic\u a \^ in DOM-ul real doar modific\u arile
+strict necesare. E un detaliu de implementare, dar are un efect
+practic important: interfe\c tele r\u am\^ an fluide chiar \c si
+c\^ and datele se schimb\u a frecvent.
+
+O schimbare major\u a a venit \^ in 2019, odat\u a cu introducerea
+\textbf{Hook-urilor}. \^ Inainte, orice component\u a care avea
+nevoie de stare trebuia scris\u a ca o clas\u a -- verbos \c si
+greu de urm\u arit. Hook-urile (\texttt{useState},
+\texttt{useEffect} \c si celelalte) au rezolvat asta elegant,
+allow\^ and gestionarea st\u arii direct \^ in func\c tii simple.
+\^ In Gym-Connect, toate componentele sunt func\c tionale \c si
+folosesc Hook-uri -- nu exist\u a nicio clas\u a \^ in cod.
+
+\section{TypeScript}
+
+Dac\u a React a fost o alegere de tip \textit{,,a\c sa se face''},
+TypeScript \cite{typescript2024} a fost mai degrab\u a o alegere
+din experien\c t\u a personal\u a. Am scris JavaScript pur destul
+de mult \c si \c stiu cum arat\u a un bug g\u asit \^ in produc\c tie
+dintr-o comparare de tipuri gre\c sit\u a. TypeScript elimin\u a
+\^ intreaga categorie de astfel de probleme.
+
+TypeScript este un superset al JavaScript-ului, dezvoltat de
+Microsoft \c si lansat \^ in 2012. Practic, orice cod JavaScript
+valid este \c si TypeScript valid -- diferen\c ta este c\u a
+TypeScript adaug\u a un strat de \textbf{tipizare static\u a},
+op\c tional\u a ca granularitate, dar extrem de util\u a atunci
+c\^ and proiectul cre\c ste. Compilatorul detecteaz\u a erorile
+\^ inainte de rulare, nu dup\u a.
+
+\^ In contextul Gym-Connect, avantajul concret a fost urm\u atorul:
+schema Prisma genereaz\u a automat tipuri TypeScript pentru
+modelele de date. Asta \^ inseamn\u a c\u a atunci c\^ and
+frontenidul consum\u a r\u aspunsul API-ului, editorul \c stie
+exact ce propriet\u a\c ti exist\u a pe obiectul primit, semnalez\^ and
+imediat orice acces incorect.
+
+\section{Vite}
+
+Vite \cite{vite2024} este instrumentul care compileaz\u a \c si
+serve\c ste aplica\c tia \^ in timpul dezvolt\u arii. L-am ales \^ in
+locul Create React App (care a \c si fost \^ intrerupt \^ intre timp)
+dintr-un motiv simplu: este remarcabil de rapid.
+
+Creat de Evan You (autorul Vue.js) \c si lansat \^ in 2020, Vite
+func\c tioneaz\u a diferit fa\c t\u a de bundler-ele clasice. \^ In
+modul de dezvoltare, nu proceseaz\u a \^ intreaga aplica\c tie la
+pornire -- serve\c ste fi\c sierele direct folosind modulele ES
+native ale browserului \c si transform\u a fiecare fi\c sier
+\textbf{la cerere}, abia c\^ and browserul \^ il solicit\u a. Efectul
+practic: serverul de dezvoltare porne\c ste \^ in sub o secund\u a,
+indiferent de dimensiunea proiectului.
+
+Un alt lucru apreciat \^ in practic\u a este \textbf{HMR-ul}
+(\textit{Hot Module Replacement}): modific\u arile de cod se
+reflect\u a \^ in browser \^ in milisecunde, f\u ar\u a s\u a se piard\u a
+starea aplica\c tiei.
+
+\section{Express.js}
+
+Pentru server, am ales Express.js \cite{express2024} -- nu pentru
+c\u a e singurul framework Node.js, ci pentru c\u a e cel mai
+simplu. Express \^ i\c si cunoa\c ste locul: ofer\u a rutare HTTP,
+un sistem de middleware \c si gestionarea cererilor, at\^ at.
+Restul \^ il alegi tu.
+
+Lansat \^ in 2010, Express a devenit practic sinonimul cu
+,,server Node.js''. Filosofia lui de tip \textit{,,minimalist''}
+\^ inseamn\u a c\u a nu prime\c sti o structur\u a impus\u a --
+\^ iti organizezi singur codul cum consideri c\u a se potrive\c ste
+cel mai bine. \^ In Gym-Connect asta a \^ insemnat un fi\c sier
+\texttt{app.ts} care \^ inregistreaz\u a dou\u a grupuri de rute
+(\texttt{/api/splits} \c si \texttt{/api/sessions}), un
+middleware de autentificare \c si un handler global de erori.
+Simplu \c si u\c sor de urm\u arit.
+
+\section{Prisma ORM}
+
+Interac\c tiunea cu baza de date este gestionat\u a prin Prisma
+\cite{prisma2024}, un ORM (\textit{Object-Relational Mapping})
+de genera\c tie nou\u a pentru TypeScript. Am \^ incercat \^ in
+trecut Sequelize \c si am r\u amas cu impresia unui instrument
+greoi, cu o documentatie imens\u a \c si erori greu de depanat.
+Prisma este opusul: schema se define\c ste \^ intr-un fi\c sier
+simplu \c si clar (\texttt{schema.prisma}), clientul generat
+automat este complet tipizat, iar interogarile se scriu
+\^ intr-un stil aproape lizibil ca proz\u a.
+
+Cel mai important avantaj practic: dac\u a scrii o interogare
+care acceseaz\u a un c\^ amp care nu exist\u a \^ in schema bazei
+de date, compilatorul TypeScript semnalizeaz\u a eroarea
+\^ inainte s\u a rulezi codul. Am prins astfel mai multe gre\c seli
+de tastare \^ inainte s\u a ajung\u a \^ in execu\c tie.
+
+Prisma vine \c si cu \textbf{Prisma Studio}, o interfata
+web local\u a prin care po\c ti vedea \c si edita direct datele
+din baza de date -- extrem de util \^ in faza de testare.
+
+\section{PostgreSQL \c si Neon DB}
+
+Baza de date folosit\u a este \textbf{PostgreSQL}
+\cite{postgresql2024}, g\u azduiat\u a pe platforma cloud
+\textbf{Neon DB} \cite{neon2024}. PostgreSQL este o alegere
+clasic\u a pentru aplica\c tii cu date structurate: exist\u a
+de peste 35 de ani, e open-source, respecta standardele
+SQL \c si are o reputatie solid\u a de stabilitate.
+
+Neon DB a fost ales pentru c\u a rezolv\u a elegant problema
+costurilor \^ in faza de dezvoltare. Fiind o platform\u a
+\textit{serverless}, baza de date se opre\c ste automat
+\^ in perioadele de inactivitate (\textit{auto-suspend}) \c si
+reporne\c ste la prima cerere. Planul gratuit este generos
+pentru un proiect de tip portofoliu sau licen\c t\u a:
+0.5 GB stocare \c si 100 CU-ore de calcul pe lun\u a.
+Am ales regiunea Frankfurt (EU Central) pentru laten\c t\u a
+redus\u a \^ in zona European\u a.
+
+\section{Clerk}
+
+Autentificarea este unul dintre lucrurile pe care prefer s\u a
+nu le implementez de la zero dac\u a exist\u a o solu\c tie
+matur\u a. Implementarea corect\u a a autentific\u arii --
+hashing parole, gestionare sesiuni, refresh tokenuri,
+protec\c tie brute-force -- este complex\u a \c si u\c sor
+de gre\c sit. Clerk \cite{clerk2024} rezolv\u a toate
+acestea \^ intr-un pachet.
+
+Clerk este o platform\u a de tip \textit{Authentication as
+a Service}, lansat\u a \^ in 2021. Ofer\u a componente UI
+gata de folosit pentru login \c si register, gestioneaz\u a
+sesiunile, suport\u a autentificarea social\u a \c si vine
+cu SDK-uri separate pentru frontend (\texttt{@clerk/react})
+\c si backend (\texttt{@clerk/express}). Integrarea cu
+Express se reduce practic la ad\u augarea unui middleware
+\c si a unui apel de func\c tie pentru extragerea
+\texttt{userId}-ului din cerere.
+
+Un aspect important: Clerk atribuie fiec\u arui utilizator
+autentificat un ID unic (\texttt{userId}). \^ In Gym-Connect,
+toate datele din baza de date sunt legate de acest ID, ceea
+ce garanteaz\u a c\u a un utilizator nu poate vedea sau
+modifica datele altcuiva.
+
+\section{Tailwind CSS}
+
+Pentru stilizarea interfe\c tei am ales Tailwind CSS
+\cite{tailwind2024}, un framework de tip
+\textit{utility-first} care func\c tioneaz\u a diferit
+fa\c t\u a de Bootstrap sau alte framework-uri clasice.
+\^ In loc s\u a ofere componente gata construite (un buton,
+un card, un modal), Tailwind ofer\u a clase utilitare
+de nivel sc\u azut pe care le combini direct \^ in
+HTML/JSX ca s\u a ob\c tii exact ce \^ i\c ti trebuie.
+
+La \^ inceput p\u area ciudat s\u a scrii
+\texttt{flex items-center gap-4 rounded-lg bg-gray-900}
+direct pe un element, dar dup\u a c\^ ateva zile de
+practic\u a \^ in\c telegi avantajul: nu mai sari \^ intre
+fi\c siere CSS \c si componente, totul este \^ intr-un
+singur loc. Iar datorit\u a compilatorului JIT, CSS-ul
+final con\c tine exclusiv clasele folosite efectiv,
+rezultând bundle-uri mici.
+
+\section{Recharts}
+
+Modulul de analitic\u a are nevoie de grafice, \c si pentru
+asta am ales Recharts \cite{recharts2024} -- o bibliotec\u a
+de vizualizare construit\u a peste D3.js, dar expus\u a ca
+componente React native. Am preferat-o \^ in fa\c ta D3.js
+pur pentru c\u a D3 manipuleaz\u a direct DOM-ul, ceea ce
+nu se integreaz\u a bine cu modelul React. Recharts
+func\c tioneaz\u a declarativ, ca orice alt\u a component\u a
+JSX -- defineai graficul ca structur\u a, \c si Recharts
+se ocup\u a de tot restul.
+
+\^ In practic\u a am folosit dou\u a tipuri de grafice:
+un grafic de tip \textit{arie} pentru volumul s\u apt\u am\^ anal
+\c si un grafic de tip \textit{linie} cu trei serii pentru
+evolu\c tia 1RM estimat (valori reale, trend \c si
+predic\c tie). Ambele sunt responsive \c si au tooltip-uri
+interactive.
+
+\section{Zod}
+
+Zod \cite{zod2024} este biblioteca pe care o folosesc
+pentru validarea datelor primite de server. F\u ar\u a
+validare, un utilizator r\u au inten\c tionat (sau pur
+\c si simplu un bug pe frontend) ar putea trimite date
+malformate care s\u a ajung\u a \^ in baza de date.
+
+Zod permite definirea unei scheme -- practic o descriere
+a cum ar trebui s\u a arate un obiect valid -- \c si
+parsarea datelor primite fa\c t\u a de acea schem\u a.
+Dac\u a datele nu corespund, Zod arunc\u a o eroare cu
+un mesaj clar despre ce c\^ amp e gre\c sit. Un avantaj
+important \^ in contextul TypeScript: din orice schem\u a
+Zod po\c ti extrage automat tipul corespunz\u ator cu
+\texttt{z.infer<typeof schema>}, f\u ar\u a s\u a
+duplici defini\c tia.
+
+\section{React Router}
+
+Naviga\c tia \^ intre paginile aplica\c tiei este gestionat\u a
+de React Router \cite{reactrouter2024}, biblioteca
+standard pentru rutare \^ in aplica\c tii React. Cum
+Gym-Connect este o aplica\c tie de tip \textit{SPA}
+(\textit{Single Page Application}), tranzi\c tia \^ intre
+pagini se face f\u ar\u a re\^ inc\u arcarea paginii --
+URL-ul se schimb\u a, componenta afis\c at\u a se
+schimb\u a, dar serverul nu e contactat pentru HTML nou.
+
+Am folosit React Router \c si pentru a construi
+componenta \texttt{ProtectedRoute}: o rut\u a care,
+\^ inainte s\u a afis\c eze con\c tinutul, verific\u a
+dac\u a utilizatorul este autentificat prin Clerk.
+Dac\u a nu, \^ il redirecteaz\u a c\u atre pagina de login.
+
+\section{React Hook Form}
+
+\^ In aplica\c tie exist\u a mai multe formulare: creare
+\c si editare rutin\u a, adaugare exerci\c tii. Pentru
+gestionarea lor am ales React Hook Form
+\cite{reacthookform2024}, din motive de performan\c t\u a.
+
+\^ Intr-un formular gestionat clasic cu \texttt{useState},
+orice tastare declan\c seaz\u a o re-randar\u a a
+componentei. React Hook Form evit\u a asta prin abordarea
+\textit{uncontrolled}: \^ inregistreaz\u a referinc\c te
+la elementele HTML native \c si cite\c ste valorile doar
+la submit sau la validare. Rezultatul e un formular mai
+fluid, mai ales pe dispozitive mai lente. Integrarea
+nativ\u a cu Zod prin \texttt{@hookform/resolvers}
+\^ inseamn\u a c\u a schema de validare scris\u a o
+singur\u a dat\u a este reutilizat\u a automat \c si
+pentru validarea formularului.
