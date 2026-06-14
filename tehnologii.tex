@@ -13,7 +13,7 @@ dezvoltarea \c si mentenan\c ta codului.
 
 \section{React}
 
-Atunci c\^ and am \^ inceput s\u a planific frontenidul, React
+Atunci c\^ and am \^ inceput s\u a planific frontendul, React
 \cite{react2024} era alegerea evident\u a. Nu neap\u arat pentru
 c\u a e cel mai popular -- ci pentru c\u a modelul s\u au de
 \textbf{componente} se potrive\c ste perfect cu modul \^ in care
@@ -34,7 +34,7 @@ O schimbare major\u a a venit \^ in 2019, odat\u a cu introducerea
 nevoie de stare trebuia scris\u a ca o clas\u a -- verbos \c si
 greu de urm\u arit. Hook-urile (\texttt{useState},
 \texttt{useEffect} \c si celelalte) au rezolvat asta elegant,
-allow\^ and gestionarea st\u arii direct \^ in func\c tii simple.
+permi\c t\^ and gestionarea st\u arii direct \^ in func\c tii simple.
 \^ In Gym-Connect, toate componentele sunt func\c tionale \c si
 folosesc Hook-uri -- nu exist\u a nicio clas\u a \^ in cod.
 
@@ -58,7 +58,7 @@ c\^ and proiectul cre\c ste. Compilatorul detecteaz\u a erorile
 \^ In contextul Gym-Connect, avantajul concret a fost urm\u atorul:
 schema Prisma genereaz\u a automat tipuri TypeScript pentru
 modelele de date. Asta \^ inseamn\u a c\u a atunci c\^ and
-frontenidul consum\u a r\u aspunsul API-ului, editorul \c stie
+frontendul consum\u a r\u aspunsul API-ului, editorul \c stie
 exact ce propriet\u a\c ti exist\u a pe obiectul primit, semnalez\^ and
 imediat orice acces incorect.
 
@@ -107,10 +107,10 @@ Interac\c tiunea cu baza de date este gestionat\u a prin Prisma
 \cite{prisma2024}, un ORM (\textit{Object-Relational Mapping})
 de genera\c tie nou\u a pentru TypeScript. Am \^ incercat \^ in
 trecut Sequelize \c si am r\u amas cu impresia unui instrument
-greoi, cu o documentatie imens\u a \c si erori greu de depanat.
+greoi, cu o documenta\c tie imens\u a \c si erori greu de depanat.
 Prisma este opusul: schema se define\c ste \^ intr-un fi\c sier
 simplu \c si clar (\texttt{schema.prisma}), clientul generat
-automat este complet tipizat, iar interogarile se scriu
+automat este complet tipizat, iar interog\u arile se scriu
 \^ intr-un stil aproape lizibil ca proz\u a.
 
 Cel mai important avantaj practic: dac\u a scrii o interogare
@@ -119,7 +119,7 @@ de date, compilatorul TypeScript semnalizeaz\u a eroarea
 \^ inainte s\u a rulezi codul. Am prins astfel mai multe gre\c seli
 de tastare \^ inainte s\u a ajung\u a \^ in execu\c tie.
 
-Prisma vine \c si cu \textbf{Prisma Studio}, o interfata
+Prisma vine \c si cu \textbf{Prisma Studio}, o interfa\c t\u a
 web local\u a prin care po\c ti vedea \c si edita direct datele
 din baza de date -- extrem de util \^ in faza de testare.
 
@@ -129,8 +129,8 @@ Baza de date folosit\u a este \textbf{PostgreSQL}
 \cite{postgresql2024}, g\u azduiat\u a pe platforma cloud
 \textbf{Neon DB} \cite{neon2024}. PostgreSQL este o alegere
 clasic\u a pentru aplica\c tii cu date structurate: exist\u a
-de peste 35 de ani, e open-source, respecta standardele
-SQL \c si are o reputatie solid\u a de stabilitate.
+de peste 35 de ani, e open-source, respect\u a standardele
+SQL \c si are o reputa\c tie solid\u a de stabilitate.
 
 Neon DB a fost ales pentru c\u a rezolv\u a elegant problema
 costurilor \^ in faza de dezvoltare. Fiind o platform\u a
@@ -140,7 +140,7 @@ reporne\c ste la prima cerere. Planul gratuit este generos
 pentru un proiect de tip portofoliu sau licen\c t\u a:
 0.5 GB stocare \c si 100 CU-ore de calcul pe lun\u a.
 Am ales regiunea Frankfurt (EU Central) pentru laten\c t\u a
-redus\u a \^ in zona European\u a.
+redus\u a \^ in zona european\u a.
 
 \section{Clerk}
 
@@ -186,7 +186,7 @@ practic\u a \^ in\c telegi avantajul: nu mai sari \^ intre
 fi\c siere CSS \c si componente, totul este \^ intr-un
 singur loc. Iar datorit\u a compilatorului JIT, CSS-ul
 final con\c tine exclusiv clasele folosite efectiv,
-rezultând bundle-uri mici.
+rezult\^ and bundle-uri mici.
 
 \section{Recharts}
 
@@ -197,7 +197,7 @@ componente React native. Am preferat-o \^ in fa\c ta D3.js
 pur pentru c\u a D3 manipuleaz\u a direct DOM-ul, ceea ce
 nu se integreaz\u a bine cu modelul React. Recharts
 func\c tioneaz\u a declarativ, ca orice alt\u a component\u a
-JSX -- defineai graficul ca structur\u a, \c si Recharts
+JSX -- define\c sti graficul ca structur\u a, iar Recharts
 se ocup\u a de tot restul.
 
 \^ In practic\u a am folosit dou\u a tipuri de grafice:
@@ -233,26 +233,26 @@ standard pentru rutare \^ in aplica\c tii React. Cum
 Gym-Connect este o aplica\c tie de tip \textit{SPA}
 (\textit{Single Page Application}), tranzi\c tia \^ intre
 pagini se face f\u ar\u a re\^ inc\u arcarea paginii --
-URL-ul se schimb\u a, componenta afis\c at\u a se
+URL-ul se schimb\u a, componenta afi\c sat\u a se
 schimb\u a, dar serverul nu e contactat pentru HTML nou.
 
 Am folosit React Router \c si pentru a construi
 componenta \texttt{ProtectedRoute}: o rut\u a care,
-\^ inainte s\u a afis\c eze con\c tinutul, verific\u a
+\^ inainte s\u a afi\c seze con\c tinutul, verific\u a
 dac\u a utilizatorul este autentificat prin Clerk.
 Dac\u a nu, \^ il redirecteaz\u a c\u atre pagina de login.
 
 \section{React Hook Form}
 
 \^ In aplica\c tie exist\u a mai multe formulare: creare
-\c si editare rutin\u a, adaugare exerci\c tii. Pentru
+\c si editare rutin\u a, ad\u augare exerci\c tii. Pentru
 gestionarea lor am ales React Hook Form
 \cite{reacthookform2024}, din motive de performan\c t\u a.
 
 \^ Intr-un formular gestionat clasic cu \texttt{useState},
 orice tastare declan\c seaz\u a o re-randar\u a a
 componentei. React Hook Form evit\u a asta prin abordarea
-\textit{uncontrolled}: \^ inregistreaz\u a referinc\c te
+\textit{uncontrolled}: \^ inregistreaz\u a referin\c te
 la elementele HTML native \c si cite\c ste valorile doar
 la submit sau la validare. Rezultatul e un formular mai
 fluid, mai ales pe dispozitive mai lente. Integrarea

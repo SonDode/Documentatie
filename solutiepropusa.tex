@@ -4,15 +4,27 @@ Acest capitol descrie arhitectura general\u a a aplica\c tiei Gym-Connect,
 modelul de date, API-ul REST implementat \c si mecanismele de securitate
 utilizate. Deciziile de proiectare sunt argumentate \^ in raport cu
 cerin\c tele func\c tionale \c si nefunc\c tionale ale sistemului.
+Diagramele prezentate \^ in acest capitol (arhitectur\u a, model de date,
+secven\c t\u a \c si cazuri de utilizare) au fost realizate cu ajutorul
+instrumentului \textbf{PlantUML} \cite{plantuml2024}, care permite
+generarea diagramelor UML pornind de la o descriere textual\u a.
 
 \section{Arhitectura general\u a}
 
 Gym-Connect adopt\u a o arhitectur\u a clasic\u a de tip
 \textbf{client-server}, \^ in care cele dou\u a componente principale
--- interfata utilizator (frontend) \c si serverul API (backend) --
+-- interfa\c ta utilizator (frontend) \c si serverul API (backend) --
 ruleaz\u a independent \c si comunic\u a prin cereri HTTP.
 
-Sistemul este compus din trei niveluri distincte:
+Sistemul este compus din trei niveluri distincte, ilustrate \^ in
+figura \ref{fig:arhitectura}:
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.72\textwidth]{arhitectura.png}
+  \caption{Arhitectura general\u a a aplica\c tiei Gym-Connect}
+  \label{fig:arhitectura}
+\end{figure}
 
 \begin{enumerate}
   \item \textbf{Nivelul de prezentare (Frontend)} -- aplica\c tia React
@@ -27,8 +39,8 @@ Sistemul este compus din trei niveluri distincte:
         de business \c si interac\c tioneaz\u a cu baza de date
         prin Prisma ORM.
 
-  \item \textbf{Nivelul de date (Baza de date)} -- instanc\c ta
-        PostgreSQL g\u azduita pe platforma Neon DB. Stocheaz\u a
+  \item \textbf{Nivelul de date (Baza de date)} -- instan\c ta
+        PostgreSQL g\u azduit\u a pe platforma Neon DB. Stocheaz\u a
         toate datele aplica\c tiei: rutine de antrenament,
         sesiuni \c si seturi individuale.
 \end{enumerate}
@@ -36,7 +48,7 @@ Sistemul este compus din trei niveluri distincte:
 Fluxul standard al unei cereri este urm\u atorul: browserul
 utilizatorului trimite o cerere HTTP c\u atre serverul Express,
 \^ inso\c tit\u a de un token de autentificare Clerk. Serverul
-valideaz\u a tokenul, proceseaz\u a cererea, interogh\u eaz\u a
+valideaz\u a tokenul, proceseaz\u a cererea, interogheaz\u a
 baza de date prin Prisma \c si returneaz\u a r\u aspunsul \^ in
 format JSON c\u atre client.
 
@@ -98,7 +110,7 @@ rela\c tionale independente.
 Modelul \texttt{WorkoutSession} reprezint\u a o \textbf{sesiune de
 antrenament efectuat\u a} -- o \^ inregistrare a unui antrenament
 real, cu data, durata \c si seturile efectuate. Fiecare sesiune
-poate fi optic\c tional asociat\u a cu o rutin\u a de antrenament
+poate fi op\c tional asociat\u a cu o rutin\u a de antrenament
 (\texttt{SplitTemplate}), dar poate exista \c si independent
 (antrenament liber). Rela\c tia cu \texttt{SplitTemplate} este
 de tip \textit{many-to-one}, cu comportament \texttt{SetNull}
@@ -171,6 +183,17 @@ intensit\u a\c tii antrenamentului.
 
 \subsection{Rela\c tiile dintre modele}
 
+Diagrama entitate-rela\c tie din figura \ref{fig:bazadedate} prezint\u a
+structura complet\u a a bazei de date, cu cele trei modele, c\^ ampurile
+lor \c si rela\c tiile dintre ele.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{bazadedate.png}
+  \caption{Diagrama entitate-rela\c tie a bazei de date}
+  \label{fig:bazadedate}
+\end{figure}
+
 Cele trei modele formeaz\u a o ierarhie clar\u a:
 
 \begin{itemize}
@@ -219,7 +242,7 @@ cu \texttt{exerciseId}, \texttt{targetSets} \c si
 \texttt{targetRepRange} valide. Endpoint-urile
 \texttt{PUT} \c si \texttt{DELETE} verific\u a suplimentar c\u a
 resursa solicitat\u a apar\c tine utilizatorului curent,
-returnând HTTP 404 \^ in caz contrar.
+return\^ and HTTP 404 \^ in caz contrar.
 
 \subsection{Endpoint-uri pentru sesiuni (\texttt{/api/sessions})}
 
@@ -243,12 +266,25 @@ singur\u a cerere toate datele sesiunii: metadatele
 complet\u a a seturilor efectuate. Crearea sesiunii \c si
 a seturilor asociate se face \^ intr-o singur\u a tranzac\c tie
 Prisma (\texttt{create} cu \texttt{sets: \{ create: [...] \}}),
-garantând atomicitatea opera\c tiei -- fie se salveaz\u a
+garant\^ and atomicitatea opera\c tiei -- fie se salveaz\u a
 totul, fie nimic.
 
 Endpoint-ul \texttt{GET /api/sessions} returneaz\u a sesiunile
 ordonate descendent dup\u a dat\u a, \^ impreun\u a cu seturile
 asociate ordonate dup\u a \texttt{setOrder}.
+
+Figura \ref{fig:secventa} ilustreaz\u a, sub forma unei diagrame de
+secven\c t\u a, fluxul complet declan\c sat la salvarea unui antrenament:
+de la trimiterea cererii de c\u atre client, p\^ an\u a la validarea
+tokenului prin Clerk, validarea datelor cu Zod, scrierea \^ in baza de
+date prin Prisma \c si returnarea r\u aspunsului.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{secventa.png}
+  \caption{Diagrama de secven\c t\u a pentru salvarea unei sesiuni de antrenament}
+  \label{fig:secventa}
+\end{figure}
 
 \section{Autentificarea \c si securitatea}
 
@@ -262,7 +298,7 @@ de validare a sesiunilor pe server.
 Fluxul de autentificare func\c tioneaz\u a \^ in urm\u atorii pa\c si:
 
 \begin{enumerate}
-  \item Utilizatorul se autentific\u a prin interfata Clerk
+  \item Utilizatorul se autentific\u a prin interfa\c ta Clerk
         (email + parol\u a sau OAuth).
   \item Clerk emite un \textbf{JWT} (\textit{JSON Web Token})
         semnat cu cheia privat\u a a aplica\c tiei.
@@ -272,7 +308,7 @@ Fluxul de autentificare func\c tioneaz\u a \^ in urm\u atorii pa\c si:
   \item Pe server, middleware-ul \texttt{clerkMiddleware()}
         valideaz\u a tokenul \c si populeaz\u a obiectul cererii
         cu datele utilizatorului autentificat.
-  \item Middleware-ul \texttt{requireAuth} extras\u a
+  \item Middleware-ul \texttt{requireAuth} extrage
         \texttt{userId} din cerere; dac\u a acesta lipse\c ste,
         returneaz\u a HTTP 401.
 \end{enumerate}
@@ -297,7 +333,7 @@ toate rutele API \c si are urm\u atoarea logic\u a:
 Prin aceast\u a abordare, nicio rut\u a API nu poate fi
 accesat\u a f\u ar\u a un token valid, iar \texttt{userId}
 este extras exclusiv din tokenul verificat de Clerk, nu
-din parametrii cererii -- eliminând posibilitatea
+din parametrii cererii -- elimin\^ and posibilitatea
 falsific\u arii identit\u a\c tii.
 
 \subsection{Protec\c tia rutelor \^ in frontend}
@@ -307,38 +343,30 @@ falsific\u arii identit\u a\c tii.
 \texttt{useAuth()} al Clerk pentru a verifica starea de
 autentificare. Dac\u a utilizatorul nu este autentificat,
 este redirijat automat c\u atre pagina de autentificare.
-\^ In caz contrar, componenta afis\c eaz\u a con\c tinutul
+\^ In caz contrar, componenta afi\c seaz\u a con\c tinutul
 paginii solicitate.
 
-\section{Diagrama Use-Case}
+\section{Diagrama cazurilor de utilizare}
 
-Diagrama Use-Case din figura \ref{fig:usecase} ilustreaz\u a
-principalele interac\c tiuni ale utilizatorului cu
-aplica\c tia Gym-Connect.
+Pentru a sintetiza interac\c tiunile posibile dintre utilizator \c si
+aplica\c tie, figura \ref{fig:usecase} prezint\u a diagrama cazurilor
+de utilizare (\textit{use-case}). Aceasta distinge \^ intre dou\u a
+tipuri de actori: utilizatorul neautentificat, care poate doar s\u a
+\^ i\c si creeze un cont sau s\u a se autentifice, \c si utilizatorul
+autentificat, care are acces la \^ intreaga func\c tionalitate a
+aplica\c tiei.
 
-% TODO: adauga diagrama use-case (usecase.png) in folderul documentatie
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=0.85\textwidth]{usecase.png}
-%   \caption{Diagrama Use-Case a aplica\c tiei Gym-Connect}
-%   \label{fig:usecase}
-% \end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{usecase.png}
+  \caption{Diagrama cazurilor de utilizare a aplica\c tiei Gym-Connect}
+  \label{fig:usecase}
+\end{figure}
 
-Utilizatorul neautentificat poate accesa exclusiv pagina de
-start \c si paginile de autentificare. Dup\u a autentificare,
-acesta poate efectua urm\u atoarele ac\c tiuni principale:
+Dup\u a autentificare, utilizatorul poate gestiona rutine de
+antrenament (creare, editare, \c stergere), poate efectua un
+antrenament -- caz care include obligatoriu \^ inregistrarea
+seturilor cu greutate, repeti\c tii \c si RIR -- poate vizualiza
+istoricul sesiunilor anterioare \c si poate analiza progresul
+prin intermediul modulului de analitic\u a.
 
-\begin{itemize}
-  \item \textbf{Gestiona rutine} -- creare, editare \c si \c stergere
-        rutine de antrenament cu exerci\c tii, seturi \c si
-        repeti\c tii \c tint\u a.
-  \item \textbf{Efectua antrenament} -- pornire sesiune de
-        antrenament bazat\u a pe o rutin\u a existent\u a,
-        \^ inregistrare seturi cu greut\u a\c ti, repeti\c tii
-        \c si RIR, utilizare calculator de pl\u aci.
-  \item \textbf{Vizualiza istoricul} -- consultarea tuturor
-        sesiunilor anterioare cu detalii complete.
-  \item \textbf{Analiza progresul} -- vizualizarea volumului
-        s\u apt\u am\^ anal, a evolu\c tiei 1RM estimat \c si
-        a avertismentelor de platou.
-\end{itemize}

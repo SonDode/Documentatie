@@ -2,12 +2,101 @@
 
 \section{Rezultate ob\c tinute}
 
-% DE COMPLETAT - ce s-a realizat, obiective atinse
+La finalul acestui proiect pot spune c\u a obiectivul principal a fost
+atins: Gym-Connect este o aplica\c tie web func\c tional\u a, care
+rezolv\u a exact problema de la care am pornit -- gestionarea ordonat\u a
+a antrenamentelor de for\c t\u a \c si urm\u arirea progresului pe termen
+lung, totul gratuit \c si accesibil direct din browser.
+
+Concret, aplica\c tia implementeaz\u a toate func\c tionalit\u a\c tile
+propuse \^ in capitolul introductiv. Utilizatorul \^ i\c si poate crea
+cont \c si autentifica \^ in siguran\c t\u a prin Clerk, \^ i\c si poate
+defini rutine de antrenament personalizate cu exerci\c tii, seturi \c si
+intervale de repeti\c tii \c tint\u a, \c si poate \^ inregistra sesiuni
+de antrenament \^ in timp real. Modulul de antrenament ofer\u a un timer
+de odihn\u a \^ intre seturi, un calculator de distribu\c tie a pl\u acilor
+pe bar\u a \c si suport pentru indicatorii de intensitate RIR \c si 1RM
+estimat. \^ In plus, toate datele introduse de un utilizator sunt
+izolate complet de ale celorlal\c ti, prin legarea fiec\u arei
+\^ inregistr\u ari de identificatorul Clerk.
+
+Cea mai valoroas\u a parte a aplica\c tiei r\u am\^ ane, \^ in opinia mea,
+modulul de analitic\u a. Acesta nu doar afi\c seaz\u a un istoric brut
+al antrenamentelor, ci transform\u a datele \^ in informa\c tie util\u a:
+calculeaz\u a volumul s\u apt\u am\^ anal de antrenament, estimeaz\u a
+evolu\c tia for\c tei prin 1RM \c si, folosind regresia liniar\u a,
+proiecteaz\u a o tendin\c t\u a pe urm\u atoarele s\u apt\u am\^ ani.
+Func\c tia de detec\c tie automat\u a a platourilor avertizeaz\u a
+utilizatorul atunci c\^ and progresul stagneaz\u a, suger\^ and momentul
+potrivit pentru un deload. Tocmai aceste func\c tionalit\u a\c ti --
+absente din versiunile gratuite ale aplica\c tiilor concurente
+analizate \^ in Capitolul 2 -- reprezint\u a contribu\c tia original\u a
+principal\u a a acestei lucr\u ari.
+
+Din punct de vedere tehnic, proiectul a confirmat c\u a o stiv\u a
+modern\u a, omogen\u a TypeScript at\^ at pe frontend c\^ at \c si pe
+backend, permite dezvoltarea rapid\u a a unei aplica\c tii complete,
+cu un cod u\c sor de \^ intre\c tinut \c si extins.
 
 \section{Limit\u arile solu\c tiei actuale}
 
-% DE COMPLETAT - ce nu s-a implementat, ce ar putea fi imbunatatit
+De\c si aplica\c tia \^ i\c si \^ indepline\c ste scopul, sunt con\c stient
+de o serie de limit\u ari pe care le-am identificat pe parcurs.
+
+\^ In primul r\^ and, predic\c tia evolu\c tiei 1RM se bazeaz\u a pe
+regresie liniar\u a, un model simplu care presupune o cre\c stere
+constant\u a \^ in timp. \^ In realitate, progresul \^ in for\c t\u a
+nu este liniar -- la \^ inceput cre\c sterile sunt rapide, apoi
+\^ incetinesc. Un model mai sofisticat ar oferi predic\c tii mai
+realiste, mai ales pe orizonturi lungi.
+
+\^ In al doilea r\^ and, biblioteca de exerci\c tii este, \^ in acest
+moment, predefinit\u a \^ in aplica\c tie. Utilizatorul nu poate ad\u auga
+exerci\c tii proprii care nu se reg\u asesc \^ in list\u a, ceea ce
+poate fi o limitare pentru sportivii cu rutine mai pu\c tin
+conven\c tionale.
+
+\^ In al treilea r\^ and, aplica\c tia func\c tioneaz\u a exclusiv online.
+Nu exist\u a un mod offline -- dac\u a utilizatorul pierde conexiunea
+la internet \^ in timpul antrenamentului, nu \^ i\c si poate salva
+sesiunea. Pentru o aplica\c tie folosit\u a \^ intr-o sal\u a de for\c t\u a,
+unde semnalul poate fi slab, acesta este un dezavantaj real.
+
+\^ In fine, dependen\c ta de servicii externe -- Clerk pentru
+autentificare \c si Neon pentru baza de date -- \^ inseamn\u a c\u a
+disponibilitatea aplica\c tiei depinde de disponibilitatea acestor
+servicii. \^ Intr-un context de produc\c tie serioas\u a, aceast\u a
+dependen\c t\u a ar trebui evaluat\u a cu aten\c tie.
 
 \section{Direc\c tii de dezvoltare ulterioar\u a}
 
-% DE COMPLETAT - functionalitati viitoare (ex: aplicatie mobila, social features, AI coach)
+Pornind de la limit\u arile de mai sus, exist\u a mai multe direc\c tii
+\^ in care Gym-Connect ar putea evolua.
+
+O prim\u a \^ imbun\u at\u a\c tire natural\u a ar fi \^ inlocuirea
+regresiei liniare cu un model de predic\c tie mai apropiat de
+realitatea fiziologic\u a a antrenamentului, eventual o curb\u a
+logaritmic\u a sau un model care \c tine cont de istoricul individual
+al fiec\u arui utilizator.
+
+O a doua direc\c tie ar fi ad\u augarea posibilit\u a\c tii de a
+defini exerci\c tii personalizate \c si chiar categorii de exerci\c tii
+proprii, oferind astfel mai mult\u a flexibilitate.
+
+Transformarea aplica\c tiei \^ intr-o \textbf{Progressive Web App}
+(PWA) ar rezolva problema modului offline: utilizatorul \c si-ar
+putea \^ inregistra antrenamentul local, urm\^ and ca datele s\u a se
+sincronizeze automat la reconectare. Aceasta ar fi, probabil,
+cea mai util\u a \^ imbun\u at\u a\c tire din perspectiva utiliz\u arii
+reale \^ in sal\u a.
+
+Pe termen mai lung, mi-ar pl\u acea s\u a explorez integrarea unor
+func\c tionalit\u a\c ti sociale -- posibilitatea de a urm\u ari
+progresul prietenilor sau de a compara rezultate -- \c si chiar
+sugestii inteligente de antrenament, generate pe baza istoricului
+\c si a obiectivelor utilizatorului.
+
+Indiferent de direc\c tia aleas\u a, consider c\u a fundamentul
+construit \^ in cadrul acestei lucr\u ari -- o arhitectur\u a curat\u a,
+modular\u a \c si bine documentat\u a -- ofer\u a o baz\u a solid\u a
+pentru oricare dintre aceste dezvolt\u ari viitoare.

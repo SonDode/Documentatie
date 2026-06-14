@@ -10,7 +10,15 @@
 \usepackage{listings}
 \usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig,epstopdf,url,array}
 \usepackage{multicol,multirow}
+\usepackage{float}
 \include{custom-lst-style}
+
+% Comanda pentru loc rezervat captura de ecran.
+% Inlocuieste \locscreenshot{...} cu \includegraphics[...]{fisier.png} dupa ce adaugi poza.
+\newcommand{\locscreenshot}[2][8cm]{%
+  \fbox{\parbox[c][#1][c]{0.85\textwidth}{%
+    \centering\itshape\color{gray} [ Loc pentru captur\u a de ecran ]\\[4pt] #2}}%
+}
 
 %-----------------------------------------------------------------------------------------------------------%
 % PORTIUNE CUSTOMIZABILA - DATE PERSONALE
@@ -26,7 +34,7 @@
 \coordonatorPrincipal{Dorin Iordache}
 
 \autor{Dode Andrei - Robert}
-\data{2026}
+\data{Iulie 2026}
 
 %-----------------------------------------------------------------------------------------------------------%
 
@@ -39,6 +47,8 @@
 \include{abstract}
 
 \tableofcontents
+\listoffigures
+\listoftables
 
 \pagenumbering{arabic}
 
@@ -50,7 +60,7 @@
 \include{prezentareaplicatie} % Cap. 5 - Prezentarea aplicatiei
 \include{concluzii}          % Cap. 6 - Concluzii
 
-\bibliographystyle{unsrt}
+\bibliographystyle{plain}
 \setlength{\baselineskip}{\normalbaselineskip}
 \setlength{\parskip}{0pt}
 \bibliography{refs}
